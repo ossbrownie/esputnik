@@ -19,10 +19,5 @@
         "psr-4": {
             "Brownie\\ESputnik\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "0.0.1": "0.0.1"
-        }
     }
 }
