@@ -1,0 +1,28 @@
+{
+    "name": "ossbrownie/esputnik",
+    "description": "Marketing automation system ESputnik.",
+    "license": "LGPLv3",
+    "type": "library",
+    "keywords": ["brownie", "esputnik"],
+    "homepage": "https://github.com/ossbrownie/esputnik",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "brownie",
+            "email": "oss.brownie@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brownie\\ESputnik\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "0.0.1": "0.0.1"
+        }
+    }
+}
