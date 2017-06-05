@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.3 (  )
+Features:
+- Added dependence on the extension of php-curl in the composer.json. 
+
 ## 0.0.2 ( 2017-06-06 )
 Bugfixes:
 - Fixed auto loading of classes and annotation.
