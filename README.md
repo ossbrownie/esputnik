@@ -8,6 +8,7 @@ A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for
 
 ## Requirements
 - **PHP** >= 5.4
+- **EXT-CURL** = *
 
 ## Contact
 
