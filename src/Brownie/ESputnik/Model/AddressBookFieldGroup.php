@@ -112,7 +112,7 @@ class AddressBookFieldGroup extends EntityList
     /**
      * Returns the fields as an array.
      *
-     * @return array
+     * @return AddressBookField[]
      */
     public function getFields()
     {

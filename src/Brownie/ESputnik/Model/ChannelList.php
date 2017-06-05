@@ -8,6 +8,7 @@
 namespace Brownie\ESputnik\Model;
 
 use Brownie\ESputnik\Model\Base\EntityList;
+use Brownie\ESputnik\Model\Base\Channel;
 
 /**
  * List of media channels. You can add maximum two channels of the same type.

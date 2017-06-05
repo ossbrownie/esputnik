@@ -7,6 +7,8 @@
 
 namespace Brownie\ESputnik\Model;
 
+use Brownie\ESputnik\Model\Base\Channel;
+
 /**
  * Media channel "email".
  */

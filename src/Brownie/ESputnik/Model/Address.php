@@ -30,7 +30,7 @@ class Address extends ArrayList
     /**
      * Returns the fields as an array.
      *
-     * @return array
+     * @return string[]
      */
     public function toArray()
     {

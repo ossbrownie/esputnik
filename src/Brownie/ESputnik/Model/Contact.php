@@ -9,6 +9,7 @@ namespace Brownie\ESputnik\Model;
 
 use Brownie\ESputnik\Exception\Validate;
 use Brownie\ESputnik\Model\Base\ArrayList;
+use Brownie\ESputnik\Model\Base\Channel;
 
 /**
  * @method Contact  setId($id)                      Set id.

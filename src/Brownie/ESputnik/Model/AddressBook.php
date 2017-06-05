@@ -113,7 +113,7 @@ class AddressBook extends EntityList
     /**
      * Returns field groups.
      *
-     * @return array
+     * @return AddressBookFieldGroup[]
      */
     public function getFieldGroups()
     {
