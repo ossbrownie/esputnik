@@ -14,13 +14,6 @@ abstract class Channel extends ArrayList
         'value' => null,
     ];
 
-    public function __construct($value)
-    {
-        parent::__construct([
-            'value' => $value
-        ]);
-    }
-
     private function getType()
     {
         return $this->type;

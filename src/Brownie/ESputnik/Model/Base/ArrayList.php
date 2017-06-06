@@ -42,4 +42,14 @@ abstract class ArrayList
     {
         return $this->fields[$name];
     }
+
+    /**
+     * Returns the field list as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->fields;
+    }
 }

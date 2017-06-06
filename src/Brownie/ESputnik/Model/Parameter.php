@@ -10,13 +10,16 @@ namespace Brownie\ESputnik\Model;
 use Brownie\ESputnik\Model\Base\ArrayList;
 
 /**
- * Additional field of contact.
+ * Event parameter.
+ *
+ * @method Parameter    setName($name)      Sets parameter name.
+ * @method Parameter    setValue($value)    Sets parameter value.
  */
-class Field extends ArrayList
+class Parameter extends ArrayList
 {
 
     protected $fields = [
-        'id' => null,
+        'name' => null,
         'value' => null,
     ];
 }

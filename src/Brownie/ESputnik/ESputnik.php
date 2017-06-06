@@ -7,7 +7,7 @@
 
 namespace Brownie\ESputnik;
 
-use Brownie\ESputnik\HTTPClient\Curl as HTTPClient;
+use Brownie\ESputnik\HTTPClient\HTTPClient;
 use Brownie\ESputnik\Model\Version;
 use Brownie\ESputnik\Model\Subscribe;
 use Brownie\ESputnik\Model\Contact;
@@ -16,6 +16,7 @@ use Brownie\ESputnik\Model\GroupList;
 use Brownie\ESputnik\Model\AddressBook;
 use Brownie\ESputnik\Model\AddressBookFieldGroup;
 use Brownie\ESputnik\Model\AddressBookField;
+use Brownie\ESputnik\Model\Event;
 
 /**
  * ESputnik API.
@@ -71,7 +72,10 @@ class ESputnik
     {
         $response = $this
             ->getHttpClient()
-            ->request(HTTPClient::HTTP_CODE_200, 'version');
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                'version'
+            );
 
         return new Version([
             'version' => $response['response']['version'],
@@ -97,7 +101,12 @@ class ESputnik
 
         $response = $this
             ->getHttpClient()
-            ->request(HTTPClient::HTTP_CODE_200, 'contact/subscribe', $data, HTTPClient::HTTP_METHOD_POST);
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                'contact/subscribe',
+                $data,
+                HTTPClient::HTTP_METHOD_POST
+            );
 
         return new Contact([
             'id' => $response['response']['id']
@@ -113,7 +122,10 @@ class ESputnik
     {
         $response = $this
             ->getHttpClient()
-            ->request(HTTPClient::HTTP_CODE_200, 'addressbooks');
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                'addressbooks'
+            );
 
         $addressBook = new AddressBook(
             $response['response']['addressBook']['addressBookId'],
@@ -151,7 +163,10 @@ class ESputnik
     {
         $response = $this
             ->getHttpClient()
-            ->request(HTTPClient::HTTP_CODE_200, 'groups');
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                'groups'
+            );
 
         $groups = new GroupList();
         foreach ($response['response'] as $data) {
@@ -164,5 +179,20 @@ class ESputnik
         }
 
         return $groups;
+    }
+
+    public function event(Event $event)
+    {
+        $this
+            ->getHttpClient()
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                'event',
+                $event->toArray(),
+                HTTPClient::HTTP_METHOD_POST,
+                true
+            );
+
+        return true;
     }
 }

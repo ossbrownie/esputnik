@@ -25,16 +25,4 @@ class Group extends ArrayList
         'name' => null,
         'type' => null,
     ];
-
-    /**
-     * Sets incoming data.
-     *
-     * @param string|null   $name   Name.
-     */
-    public function __construct($name = null)
-    {
-        parent::__construct([
-            'name' => $name
-        ]);
-    }
 }

@@ -26,14 +26,4 @@ class Address extends ArrayList
         'address' => null,
         'postcode' => null,
     ];
-
-    /**
-     * Returns the fields as an array.
-     *
-     * @return string[]
-     */
-    public function toArray()
-    {
-        return $this->fields;
-    }
 }

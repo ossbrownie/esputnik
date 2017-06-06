@@ -4,18 +4,13 @@
  * @author      Brownie <oss.brownie@gmail.com>
  * @license     http://www.gnu.org/copyleft/lesser.html
  */
-
 namespace Brownie\ESputnik\HTTPClient;
 
-use Brownie\ESputnik\Config;
-use Brownie\ESputnik\Exception\Curl as CurlException;
-use Brownie\ESputnik\Exception\Json as JsonException;
 use Brownie\ESputnik\Exception\InvalidCode as InvalidCodeException;
+use Brownie\ESputnik\Exception\Json as JsonException;
+use Brownie\ESputnik\Config;
 
-/**
- * HTTP client based on cURL.
- */
-class Curl
+abstract class HTTPClient
 {
     const HTTP_METHOD_GET = 'GET';
 
@@ -71,19 +66,24 @@ class Curl
      * Performs a network request in ESputnik.
      * Returns the response from ESputnik.
      *
-     * @param int    $checkHTTPCode Checked HTTP Code
-     * @param string $endpoint      The access endpoint to the resource.
-     * @param array  $data          An array of data to send.
-     * @param string $method        Query Method.
+     * @param int       $checkHTTPCode          Checked HTTP Code
+     * @param string    $endpoint               The access endpoint to the resource.
+     * @param array     $data                   An array of data to send.
+     * @param string    $method                 Query Method.
+     * @param boolean   $ignoreEmptyResponse    Semaphore of ignoring an empty response.
      *
-     * @throws CurlException
      * @throws InvalidCodeException
      * @throws JsonException
      *
      * @return array
      */
-    public function request($checkHTTPCode, $endpoint, $data = [], $method = self::HTTP_METHOD_GET)
-    {
+    public function request(
+        $checkHTTPCode,
+        $endpoint,
+        $data = [],
+        $method = self::HTTP_METHOD_GET,
+        $ignoreEmptyResponse = false
+    ) {
         /**
          * Creates a complete URL to the resource.
          */
@@ -96,29 +96,17 @@ class Curl
             ]
         );
 
-        if (!is_array($data)) {
+        if (is_object($data)) {
             $data = $data->toArray();
         }
 
-        /**
-         * Executes a network resource request.
-         */
-        $curl = curl_init($apiUrl);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
-        curl_setopt($curl, CURLOPT_TIMEOUT, $this->getConfig()->getTimeOut());
-        curl_setopt($curl, CURLOPT_NOPROGRESS, true);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_URL, $apiUrl);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, [
-            'Connection: close',
-            'Accept: application/json',
-            'Content-Type: application/json; charset=utf-8'
-        ]);
-        curl_setopt($curl, CURLOPT_USERPWD, $this->getConfig()->getUserPwd());
-        $responseBody = curl_exec($curl);
-
-        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        list($responseBody, $httpCode, $runtime) = $this->httpRequest(
+            $apiUrl,
+            $this->getConfig()->getUserPwd(),
+            $data,
+            $method,
+            $this->getConfig()->getTimeOut()
+        );
 
         /**
          * Checking HTTP Code.
@@ -127,25 +115,18 @@ class Curl
             throw new InvalidCodeException($httpCode);
         }
 
-        /**
-         * Network error checking.
-         */
-        if ((0 != curl_errno($curl)) || !is_string($responseBody)) {
-            throw new CurlException(curl_error($curl));
+        if ($ignoreEmptyResponse && empty($response)) {
+            $response = [];
+        } else {
+            $response = json_decode($responseBody, true);
+
+            /**
+             * Parse Json checking.
+             */
+            if (json_last_error() != JSON_ERROR_NONE) {
+                throw new JsonException(json_last_error_msg());
+            }
         }
-
-        $response = json_decode($responseBody, true);
-
-        /**
-         * Parse Json checking.
-         */
-        if (json_last_error() != JSON_ERROR_NONE) {
-            throw new JsonException(json_last_error_msg());
-        }
-
-        $runtime = curl_getinfo($curl, CURLINFO_TOTAL_TIME);
-
-        curl_close($curl);
 
         return [
             'httpCode' => $httpCode,
@@ -153,4 +134,23 @@ class Curl
             'runtime' => $runtime
         ];
     }
+
+    /**
+     * Performs a network request.
+     *
+     * @param string    $apiUrl
+     * @param string    $userPwd
+     * @param array     $data
+     * @param string    $method
+     * @param int       $timeOut
+     *
+     * @return mixed
+     */
+    abstract protected function httpRequest(
+        $apiUrl,
+        $userPwd,
+        $data,
+        $method,
+        $timeOut
+    );
 }

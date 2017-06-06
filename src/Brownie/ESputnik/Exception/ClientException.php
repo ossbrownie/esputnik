@@ -10,6 +10,6 @@ namespace Brownie\ESputnik\Exception;
 /**
  * Exception thrown at network errors.
  */
-class Curl extends \Exception
+class ClientException extends \Exception
 {
 }

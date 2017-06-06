@@ -11,6 +11,12 @@ use Brownie\ESputnik\Model\Base\ArrayList;
 
 /**
  * ESputnik configuration.
+ *
+ * @method string   getLogin()              Returns the login.
+ * @method string   getPassword()           Returns the password.
+ * @method string   getProtocolVersion()    Returns the version of the API.
+ * @method int      getTimeOut()            Returns the connection timeout.
+ * @method string   getApiUrl()             Returns the url API.
  */
 class Config extends ArrayList
 {
