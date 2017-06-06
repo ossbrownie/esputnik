@@ -5,10 +5,9 @@
  * @license     http://www.gnu.org/copyleft/lesser.html
  */
 
-namespace Brownie\ESputnik\HTTPClient\Curl;
+namespace Brownie\ESputnik\HTTPClient;
 
 use Brownie\ESputnik\Exception\ClientException;
-use Brownie\ESputnik\HTTPClient\HTTPClient;
 
 /**
  * HTTP client based on cURL.
