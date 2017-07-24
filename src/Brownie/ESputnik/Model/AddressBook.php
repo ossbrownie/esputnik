@@ -20,7 +20,7 @@ class AddressBook extends EntityList
      * Key name of the block.
      * @var string
      */
-    protected $keyName;
+    protected $keyName = 'address_book';
 
     /**
      * ID of this catalog.

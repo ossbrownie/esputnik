@@ -6,11 +6,12 @@
  */
 namespace Brownie\ESputnik\HTTPClient;
 
-use Brownie\ESputnik\Exception\InvalidCode as InvalidCodeException;
-use Brownie\ESputnik\Exception\Json as JsonException;
+use Brownie\ESputnik\Exception\InvalidCodeException;
+use Brownie\ESputnik\Exception\JsonException;
 use Brownie\ESputnik\Config;
+use Brownie\ESputnik\HTTPClient\Client;
 
-abstract class HTTPClient
+class HTTPClient
 {
     const HTTP_METHOD_GET = 'GET';
 
@@ -29,13 +30,36 @@ abstract class HTTPClient
     private $config;
 
     /**
+     * HTTP client.
+     * @var Client
+     */
+    private $client;
+
+    /**
      * Sets incoming data.
      *
+     * @param Client    $client     HTTP client.
      * @param Config    $config     ESputnik configuration.
      */
-    public function __construct(Config $config)
+    public function __construct(Client $client, Config $config)
     {
-        $this->setConfig($config);
+        $this
+            ->setClient($client)
+            ->setConfig($config);
+    }
+
+    /**
+     * Sets the request client.
+     * Returns the current object.
+     *
+     * @param Client $client
+     *
+     * @return self
+     */
+    private function setClient(Client $client)
+    {
+        $this->client = $client;
+        return $this;
     }
 
     /**
@@ -50,6 +74,16 @@ abstract class HTTPClient
     {
         $this->config = $config;
         return $this;
+    }
+
+    /**
+     * Returns request client.
+     *
+     * @return Client
+     */
+    private function getClient()
+    {
+        return $this->client;
     }
 
     /**
@@ -99,14 +133,15 @@ abstract class HTTPClient
         if (is_object($data)) {
             $data = $data->toArray();
         }
-
-        list($responseBody, $httpCode, $runtime) = $this->httpRequest(
-            $apiUrl,
-            $this->getConfig()->getUserPwd(),
-            $data,
-            $method,
-            $this->getConfig()->getTimeOut()
-        );
+        list($responseBody, $httpCode, $runtime) = $this
+            ->getClient()
+            ->httpRequest(
+                $apiUrl,
+                $this->getConfig()->getUserPwd(),
+                $data,
+                $method,
+                $this->getConfig()->getTimeOut()
+            );
 
         /**
          * Checking HTTP Code.
@@ -116,7 +151,7 @@ abstract class HTTPClient
         }
 
         if ($ignoreEmptyResponse && empty($response)) {
-            $response = [];
+            $response = $responseBody;
         } else {
             $response = json_decode($responseBody, true);
 
@@ -129,28 +164,8 @@ abstract class HTTPClient
         }
 
         return [
-            'httpCode' => $httpCode,
             'response' => $response,
             'runtime' => $runtime
         ];
     }
-
-    /**
-     * Performs a network request.
-     *
-     * @param string    $apiUrl
-     * @param string    $userPwd
-     * @param array     $data
-     * @param string    $method
-     * @param int       $timeOut
-     *
-     * @return mixed
-     */
-    abstract protected function httpRequest(
-        $apiUrl,
-        $userPwd,
-        $data,
-        $method,
-        $timeOut
-    );
 }

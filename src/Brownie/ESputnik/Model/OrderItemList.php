@@ -10,31 +10,31 @@ namespace Brownie\ESputnik\Model;
 use Brownie\ESputnik\Model\Base\EntityList;
 
 /**
- * List of segment names new/updated contacts will be added to.
+ * Order item list.
  */
-class GroupList extends EntityList
+class OrderItemList extends EntityList
 {
 
-    protected $keyName = 'groups';
+    protected $keyName = 'order_item_list';
 
     /**
-     * Add contact group.
+     * Add order item.
      *
-     * @param Group     $group      Contact group.
+     * @param OrderItem $orderItem Order item
      *
      * @return self
      */
-    public function add(Group $group)
+    public function add(OrderItem $orderItem)
     {
-        parent::append($group);
+        parent::append($orderItem);
         return $this;
     }
 
     public function toArray()
     {
         return array_map(
-            function (Group $group) {
-                return $group->toArray();
+            function (OrderItem $orderItem) {
+                return $orderItem->toArray();
             }, parent::toArray()
         );
     }

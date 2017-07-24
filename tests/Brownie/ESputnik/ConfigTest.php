@@ -6,6 +6,8 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 {
 
     /**
+     * The test class.
+     *
      * @var Config
      */
     protected $configClass;

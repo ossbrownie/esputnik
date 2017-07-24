@@ -8,8 +8,8 @@
 namespace Brownie\ESputnik\Exception;
 
 /**
- * An exception caused by accessing a non-existent field.
+ * Eexception caused by the validation of data.
  */
-class UndefinedMethod extends \Exception
+class ValidateException extends \Exception
 {
 }

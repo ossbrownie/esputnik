@@ -7,7 +7,7 @@
 
 namespace Brownie\ESputnik\Model\Base;
 
-use Brownie\ESputnik\Exception\UndefinedMethod;
+use Brownie\ESputnik\Exception\UndefinedMethodException;
 
 /**
  *
@@ -18,7 +18,8 @@ abstract class ArrayList
     public function __construct($values = [])
     {
         foreach ($values as $key => $value) {
-            $this->set(lcfirst($key), array($value));
+            $method = 'set' . ucfirst($key);
+            $this->$method($value);
         }
     }
 
@@ -27,7 +28,7 @@ abstract class ArrayList
         $method = substr($name, 0, 3);
         $nameField = lcfirst(substr($name, 3));
         if (!array_key_exists($nameField, $this->fields)) {
-            throw new UndefinedMethod('Call to undefined method ' . $name);
+            throw new UndefinedMethodException('Call to undefined method ' . $name);
         }
         return $this->$method($nameField, $values);
     }

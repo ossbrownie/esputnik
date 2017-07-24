@@ -8,8 +8,8 @@
 namespace Brownie\ESputnik\Exception;
 
 /**
- * Eexception caused by the validation of data.
+ * Exception caused by parsing json.
  */
-class Validate extends \Exception
+class JsonException extends \Exception
 {
 }

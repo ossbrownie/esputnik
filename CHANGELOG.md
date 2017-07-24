@@ -2,6 +2,18 @@
 
 ## dev-master
 
+## 0.1.0 (2017-07-24)
+Changed:
+- Redesigned client creation for HTTPClient.
+- Changed the ESputnik class constructor.
+- Exceptions have been renamed: InvalidCode to InvalidCodeException, Json to JsonException, UndefinedMethod to UndefinedMethodException, Validate to ValidateException.
+
+Features:
+- Added unitTest for class Brownie\ESputnik\ESputnikTest.
+- Added unitTest for class Brownie\ESputnik\HTTPClientTest.
+- Added unitTest for class Brownie\ESputnik\Model\Address.
+- Added API method "contacts".
+
 ## 0.0.3 ( 2017-06-06 )
 Features:
 - Added dependence on the extension of php-curl in the composer.json.

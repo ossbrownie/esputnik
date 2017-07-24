@@ -8,8 +8,8 @@
 namespace Brownie\ESputnik\Exception;
 
 /**
- * Exception caused by parsing json.
+ * Exception caused by an incorrect response code.
  */
-class Json extends \Exception
+class InvalidCodeException extends \Exception
 {
 }

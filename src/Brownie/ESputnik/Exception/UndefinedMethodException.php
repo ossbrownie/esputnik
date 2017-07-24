@@ -8,8 +8,8 @@
 namespace Brownie\ESputnik\Exception;
 
 /**
- * Exception caused by an incorrect response code.
+ * An exception caused by accessing a non-existent field.
  */
-class InvalidCode extends \Exception
+class UndefinedMethodException extends \Exception
 {
 }

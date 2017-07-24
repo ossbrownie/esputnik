@@ -12,7 +12,7 @@ use Brownie\ESputnik\Exception\ClientException;
 /**
  * HTTP client based on cURL.
  */
-class CurlClient extends HTTPClient
+class CurlClient implements Client
 {
 
     /**
@@ -29,7 +29,7 @@ class CurlClient extends HTTPClient
      *
      * @return array
      */
-    protected function httpRequest(
+    public function httpRequest(
         $apiUrl,
         $userPwd,
         $data,
