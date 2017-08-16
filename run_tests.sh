@@ -1,3 +1,3 @@
 #!/bin/sh
 
-phpunit --colors=always --bootstrap ./tests/bootstrap.php  ./tests
+vendor/phpunit/phpunit/phpunit --colors=always --bootstrap ./tests/bootstrap.php  ./tests

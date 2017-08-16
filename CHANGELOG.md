@@ -2,6 +2,10 @@
 
 ## dev-master
 
+## 0.1.1 (2017-08-16)
+Features:
+- Add Badge Poser
+
 ## 0.1.0 (2017-07-24)
 Changed:
 - Redesigned client creation for HTTPClient.

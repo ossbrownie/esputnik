@@ -5,7 +5,7 @@
     "type": "library",
     "keywords": ["brownie", "esputnik"],
     "homepage": "https://github.com/ossbrownie/esputnik",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "authors": [
         {
             "name": "brownie",
