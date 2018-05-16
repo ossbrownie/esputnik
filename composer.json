@@ -1,11 +1,11 @@
 {
     "name": "ossbrownie/esputnik",
     "description": "Marketing automation system ESputnik.",
-    "license": "LGPLv3",
+    "license": "MIT",
     "type": "library",
     "keywords": ["brownie", "esputnik"],
     "homepage": "https://github.com/ossbrownie/esputnik",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "authors": [
         {
             "name": "brownie",
