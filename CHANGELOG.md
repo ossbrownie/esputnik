@@ -2,6 +2,16 @@
 
 ## dev-master
 
+## 0.1.3 (2018-08-14)
+Bugfixes:
+- Fixed a bug in bringing the Subscribe model to a array.
+
+Features:
+- Added unitTest for class Brownie\ESputnik\Model\SubscribeTest.
+
+## 0.1.2 (2018-05-16)
+- Change of license for MIT
+
 ## 0.1.1 (2017-08-16)
 Features:
 - Add Badge Poser

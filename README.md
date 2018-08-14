@@ -15,6 +15,17 @@ A basic CURL wrapper for PHP (see [http://php.net/curl](http://php.net/curl) for
 - **PHP** >= 5.4
 - **EXT-CURL** = *
 
+## Installation
+Add a line to your "require" section in your composer configuration:
+
+```json
+{
+    "require": {
+        "ossbrownie/esputnik": "0.1.3"
+    }
+}
+```
+
 ## Usage
 ```php
 $eSputnik = new ESputnik(
@@ -95,6 +106,15 @@ $eSputnik = new ESputnik(
 }
 ```
 
-## Contact
+## Tests
+To run the test suite, you need install the dependencies via composer, then run PHPUnit.
+```bash
+$> composer.phar install
+$> ./vendor/bin/phpunit --colors=always --bootstrap ./tests/bootstrap.php ./tests
+```
 
+## License
+HttpClient is licensed under the [MIT License](https://opensource.org/licenses/MIT)
+
+## Contact
 Problems, comments, and suggestions all welcome: [oss.brownie@gmail.com](mailto:oss.brownie@gmail.com)
