@@ -418,8 +418,8 @@ class ESputnik
 
             );
 
-        if (isset($response['response']['id']) && (0 == $response['response']['id'])) {
-            return $response['response']['asyncSessionId'];
+        if (isset($response['response']['results']) && !empty($response['response']['results'])) {
+            return $response['response']['results'];
         }
 
         return false;
