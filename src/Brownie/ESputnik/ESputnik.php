@@ -10,6 +10,7 @@ namespace Brownie\ESputnik;
 use Brownie\ESputnik\HTTPClient\HTTPClient;
 use Brownie\ESputnik\Model\Address;
 use Brownie\ESputnik\Model\OrdersInfo;
+use Brownie\ESputnik\Model\RecipientList;
 use Brownie\ESputnik\Model\Version;
 use Brownie\ESputnik\Model\Subscribe;
 use Brownie\ESputnik\Model\Contact;
@@ -379,6 +380,39 @@ class ESputnik
             ->request(
                 HTTPClient::HTTP_CODE_200,
                 'contacts',
+                $data,
+                HTTPClient::HTTP_METHOD_POST
+
+            );
+
+        if (isset($response['response']['id']) && (0 == $response['response']['id'])) {
+            return $response['response']['asyncSessionId'];
+        }
+
+        return false;
+    }
+
+    /**
+     * SmartSend message.
+     *
+     * @param int                      $message_id              ID message for send
+     * @param RecipientList            $recipientList           List users and params for send
+     *
+     * @return bool
+     */
+    public function sendSmartMessage(
+        int $message_id,
+        RecipientList $recipientList
+    ) {
+        $data = [
+            'recipients' => $recipientList->toArray(),
+        ];
+
+        $response = $this
+            ->getHttpClient()
+            ->request(
+                HTTPClient::HTTP_CODE_200,
+                "message/{$message_id}/smartsend",
                 $data,
                 HTTPClient::HTTP_METHOD_POST
 
