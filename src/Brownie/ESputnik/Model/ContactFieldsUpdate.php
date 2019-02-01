@@ -41,6 +41,9 @@ class ContactFieldsUpdate extends ArrayList
 
     const POSTCODE = 'postcode';
 
+    const MOBILEPUSH = 'mobilepush';
+
+    const WEBPUSH = 'webpush';
     protected $fields = [
         'fieldNames' => [self::FIRST_NAME, self::LAST_NAME],
         'customFieldIDS' => null,
