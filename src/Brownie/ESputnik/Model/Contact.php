@@ -75,6 +75,10 @@ class Contact extends ArrayList
     {
         $data = [];
 
+        if ($this->getId()) {
+            $data['id'] = $this->getId();
+        }
+
         if ($this->getFirstName()) {
             $data['firstName'] = $this->getFirstName();
         }
