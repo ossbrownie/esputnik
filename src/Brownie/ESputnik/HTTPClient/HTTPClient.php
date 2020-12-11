@@ -147,7 +147,7 @@ class HTTPClient
          * Checking HTTP Code.
          */
         if ($checkHTTPCode != $httpCode) {
-            throw new InvalidCodeException($httpCode);
+            throw new InvalidCodeException($responseBody);
         }
 
         if ($ignoreEmptyResponse && empty($response)) {
