@@ -87,11 +87,13 @@ class Contact extends ArrayList
             $data['lastName'] = $this->getLastName();
         }
 
-        $data[$this->getChannelList()->getKeyName()] = array_map(
-            function (Channel $channel) {
-                return $channel->toArray();
-            }, $this->getChannelList()->toArray()
-        );
+        if ($this->getChannelList()) {
+            $data[$this->getChannelList()->getKeyName()] = array_map(
+                function (Channel $channel) {
+                    return $channel->toArray();
+                }, $this->getChannelList()->toArray()
+            );
+        }
 
         if ($this->getAddress()) {
             $data['address'] = $this->getAddress()->toArray();
